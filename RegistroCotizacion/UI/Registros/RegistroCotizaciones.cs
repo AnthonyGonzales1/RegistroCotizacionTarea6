@@ -14,6 +14,11 @@ namespace RegistroCotizacion.UI.Registros
 {
     public partial class RegistroCotizaciones : Form
     {
+        public static int Factor;
+        Articulos articulo;
+        List<CotizaDetalle> detalle = new List<CotizaDetalle>();
+        Cotizacion cotizacion;
+
         public RegistroCotizaciones()
         {
             InitializeComponent();
@@ -50,9 +55,8 @@ namespace RegistroCotizacion.UI.Registros
 
             private void Guardarbutton_Click(object sender, EventArgs e)
             {
-                Cotizacion cotizaci;
-                bool Paso = false;
-
+                Cotizacion cotizacion = CotizaBLL.Buscar((int)IdnumericUpDown.Value);
+                
                 if (HayErrores())
                 {
                     MessageBox.Show("Favor revisar todos los campos", "Validación",
@@ -60,25 +64,22 @@ namespace RegistroCotizacion.UI.Registros
                     return;
                 }
 
-                cotizaci = LlenaClase();
+                //cotizacion = LlenaClase();
 
-                //Determinar si es Guardar o Modificar
-                if (IdnumericUpDown.Value == 0)
-                    Paso = BLL.CotizaBLL.Guardar(cotizaci);
-                else
-                    //todo: validar que exista.
-                    Paso = BLL.CotizaBLL.Modificar(cotizaci);
-
-                //Informar el resultado
-                if (Paso)
+                if (cotizacion == null)
                 {
-                    Nuevobutton.PerformClick();
-                    MessageBox.Show("Guardado!!", "Exito",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (CotizaBLL.Guardar(LlenaClase(detalle)))
+                        MessageBox.Show("Se guardo la cotizacion");
+                    else
+                        MessageBox.Show("No se pudo guardar la cotizacion");
                 }
                 else
-                    MessageBox.Show("No se pudo guardar!!", "Fallo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                {
+                    if (CotizaBLL.Modificar(LlenaClase(detalle)))
+                        MessageBox.Show("Se modifico la cotizacion");
+                    else
+                        MessageBox.Show("No se pudo modificar la cotizacion");
+                } 
             }
 
             private void Eliminarbutton_Click(object sender, EventArgs e)
@@ -131,7 +132,7 @@ namespace RegistroCotizacion.UI.Registros
                 ArticulocomboBox.DisplayMember = "Descripcion";
             }
 
-            private Cotizacion LlenaClase()
+            private Cotizacion LlenaClase(List<CotizaDetalle> detalle)
             {
                 Cotizacion cotizacion = new Cotizacion();
 

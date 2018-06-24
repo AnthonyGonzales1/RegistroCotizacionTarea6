@@ -17,22 +17,27 @@ namespace RegistroCotizacion.BLL
             /// </summary>
             /// <param name="cotizaciones">Una instancia de cotizaciones</param>
             /// <returns>Retorna True si guardo o Falso si falló </returns>
-            public static bool Guardar(Cotizacion cotizaciones)
+            public static bool Guardar(Cotizacion cotizacion)
             {
                 bool paso = false;
 
-                Contexto contexto = new Contexto();
                 try
                 {
-                    if (contexto.Cotizacion.Add(cotizaciones) != null)
-                    {
-                        contexto.SaveChanges(); //Guardar los cambios
-                        paso = true;
-                    }
-                    //siempre hay que cerrar la conexion
-                    contexto.Dispose();
-                }
-                catch (Exception)
+                   Contexto contexto = new Contexto();
+                   contexto.Cotizacion.Add(cotizacion);
+                   foreach (CotizaDetalle detalle in cotizacion.Detalle)
+                   {
+                        contexto.CotizaDetalle.Add(detalle);
+                        Articulos articulo = ArticulosBLL.Buscar(detalle.ArticuloId);
+                        articulo.Cantidad += detalle.Cantidad;
+                        ArticulosBLL.Modificar(articulo);
+                   }
+
+                contexto.SaveChanges();
+                contexto.Dispose();
+                paso = true;
+            }
+            catch (Exception)
                 {
                     throw;
                 }

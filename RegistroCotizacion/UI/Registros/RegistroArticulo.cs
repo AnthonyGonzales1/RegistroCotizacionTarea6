@@ -50,6 +50,7 @@ namespace RegistroCotizacion.UI.Registros
         private void Guardarbutton_Click(object sender, EventArgs e)
         {
             bool paso = false;
+            Articulos articulo = ArticulosBLL.Buscar((int)IdnumericUpDown.Value);
             if (Validar(2))
             {
 

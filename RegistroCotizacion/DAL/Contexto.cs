@@ -16,6 +16,7 @@ namespace RegistroCotizacion.DAL
         public DbSet<Articulos> Articulos { get; set; }
         public DbSet<Personas> Personas { get; set; }
         public DbSet<Cotizacion> Cotizacion { get; set; }
+        public DbSet<CotizaDetalle> CotizaDetalle { get; set; }
         // base("ConStr") para pasar la conexion a la clase base de EntityFramework 
         public Contexto() : base("ConStr")
         {
