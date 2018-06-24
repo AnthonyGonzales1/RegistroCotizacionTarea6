@@ -22,6 +22,12 @@ namespace RegistroCotizacion.Entidades
         //todo: aprender a crear las propiedades de la forma corta.
         public Personas()
         {
+            /*PersonaId = 0;
+            Fecha = DateTime.Now;//inicializamos con la fecha actual.
+            Nombres = string.Empty;
+            Cedula = string.Empty;
+            Telefono = string.Empty;
+            Direccion = string.Empty;*/
 
         }
 

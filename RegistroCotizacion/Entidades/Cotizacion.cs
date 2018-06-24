@@ -36,7 +36,7 @@ namespace RegistroCotizacion.Entidades
         /// Este metodo permite agretar un item a la lista
         /// No es obligatorio, lo creo por comodidad
         /// </summary>
-        public void AgregarDetalle(int id, int CotizacionId, int PersonaId, int ArticuloId, int Cantidad, int Precio, int Importe)
+        public void AgregarDetalle(int id, int CotizacionId, int PersonaId, int ArticuloId, int Cantidad, Decimal Precio, Decimal Importe)
         {
             this.Detalle.Add(new CotizaDetalle(id, CotizacionId, PersonaId, ArticuloId, Cantidad, Precio, Importe));
         }

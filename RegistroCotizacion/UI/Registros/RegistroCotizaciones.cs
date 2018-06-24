@@ -50,7 +50,7 @@ namespace RegistroCotizacion.UI.Registros
 
             private void Guardarbutton_Click(object sender, EventArgs e)
             {
-                Cotizacion cotizacion;
+                Cotizacion cotizaci;
                 bool Paso = false;
 
                 if (HayErrores())
@@ -60,14 +60,14 @@ namespace RegistroCotizacion.UI.Registros
                     return;
                 }
 
-                cotizacion = LlenaClase();
+                cotizaci = LlenaClase();
 
                 //Determinar si es Guardar o Modificar
                 if (IdnumericUpDown.Value == 0)
-                    Paso = BLL.CotizaBLL.Guardar(cotizacion);
+                    Paso = BLL.CotizaBLL.Guardar(cotizaci);
                 else
                     //todo: validar que exista.
-                    Paso = BLL.CotizaBLL.Modificar(cotizacion);
+                    Paso = BLL.CotizaBLL.Modificar(cotizaci);
 
                 //Informar el resultado
                 if (Paso)

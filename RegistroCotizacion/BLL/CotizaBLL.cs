@@ -15,16 +15,16 @@ namespace RegistroCotizacion.BLL
             /// <summary>
             /// Permite guardar una entidad en la base de datos
             /// </summary>
-            /// <param name="cotizacion">Una instancia de cotizacion</param>
+            /// <param name="cotizaciones">Una instancia de cotizaciones</param>
             /// <returns>Retorna True si guardo o Falso si falló </returns>
-            public static bool Guardar(Cotizacion cotizacion)
+            public static bool Guardar(Cotizacion cotizaciones)
             {
                 bool paso = false;
 
                 Contexto contexto = new Contexto();
                 try
                 {
-                    if (contexto.Cotizacion.Add(cotizacion) != null)
+                    if (contexto.Cotizacion.Add(cotizaciones) != null)
                     {
                         contexto.SaveChanges(); //Guardar los cambios
                         paso = true;
