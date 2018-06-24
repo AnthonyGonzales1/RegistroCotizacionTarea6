@@ -42,7 +42,7 @@ namespace RegistroCotizacion.BLL
             /// <summary>
             /// Permite Modificar una entidad en la base de datos 
             /// </summary>
-            /// <param name="visita">Una instancia de visita</param>
+            /// <param name="visita">Una instancia de Cotizacion</param>
             /// <returns>Retorna True si Modifico o Falso si falló </returns>
             public static bool Modificar(Cotizacion cotizacion)
             {
@@ -79,7 +79,7 @@ namespace RegistroCotizacion.BLL
             /// <summary>
             /// Permite Eliminar una entidad en la base de datos
             /// </summary>
-            ///<param name="id">El Id de la visita que se desea eliminar </param>
+            ///<param name="id">El Id de la Cotizacion que se desea eliminar </param>
             /// <returns>Retorna True si Eliminó o Falso si falló </returns>
             public static bool Eliminar(int id)
             {
@@ -109,7 +109,7 @@ namespace RegistroCotizacion.BLL
             /// <summary>
             /// Permite Buscar una entidad en la base de datos
             /// </summary>
-            ///<param name="id">El Id de la visita que se desea encontrar </param>
+            ///<param name="id">El Id de la Cotizacion que se desea encontrar </param>
             /// <returns>Retorna la visita encontrada </returns>
             public static Cotizacion Buscar(int id)
             {
@@ -148,20 +148,18 @@ namespace RegistroCotizacion.BLL
             /// <returns>Retorna una lista de Visitas</returns>
             public static List<Cotizacion> GetList(Expression<Func<Cotizacion, bool>> expression)
             {
-                List<Cotizacion> Visitas = new List<Cotizacion>();
+                List<Cotizacion> cotizacion = new List<Cotizacion>();
                 Contexto contexto = new Contexto();
                 try
                 {
-                    Visitas = contexto.Cotizacion.Where(expression).ToList();
+                    cotizacion = contexto.Cotizacion.Where(expression).ToList();
                     contexto.Dispose();
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
-
-                return Visitas;
+                return cotizacion;
             }
         }
     }
